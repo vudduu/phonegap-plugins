@@ -8,18 +8,12 @@
 //
 
 #import <Foundation/Foundation.h>
-
-#ifdef CORDOVA_FRAMEWORK
 #import <Cordova/CDVPlugin.h>
-#else
-#import "CDVPlugin.h"
-#endif
-
 
 @interface PrintPlugin : CDVPlugin {
     NSString* successCallback;
     NSString* failCallback;
-    NSString* printHTML;
+    NSString* pdfURL;
     
     //Options
     NSInteger dialogLeftPos;
@@ -28,16 +22,17 @@
 
 @property (nonatomic, copy) NSString* successCallback;
 @property (nonatomic, copy) NSString* failCallback;
-@property (nonatomic, copy) NSString* printHTML;
+@property (nonatomic, copy) NSString* pdfURL;
+@property (nonatomic, copy) NSString* callbackId;
 
 //Print Settings
 @property NSInteger dialogLeftPos;
 @property NSInteger dialogTopPos;
 
 //Print HTML
-- (void) print:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options;
+- (void) print:(CDVInvokedUrlCommand*) command;
 
 //Find out whether printing is supported on this platform.
-- (void) isPrintingAvailable:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options;
+- (void) isPrintingAvailable:(CDVInvokedUrlCommand*) command;
 
 @end
